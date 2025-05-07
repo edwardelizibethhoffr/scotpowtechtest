@@ -12,15 +12,37 @@ struct TrackListView: View {
     @StateObject var viewModel = TrackListViewModel(service: ItunesService(networkService: NetworkService()))
     
     var body: some View {
-        List($viewModel.tracks, id: \.id) {
-            $track in
-            NavigationLink(destination: TrackDetailView()) {
-                TrackRowView(viewModel: track)
+        NavigationView {
+            ZStack {
+                List($viewModel.tracks, id: \.id) {
+                    $track in
+                    NavigationLink(destination:
+                                    TrackDetailView(viewModel: track.getDetailViewModel() )) {
+                        TrackRowView(viewModel: track)
+                    }
+                }
+                
+                if (viewModel.isFetching)
+                {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .blue))
+                        .scaleEffect(2.0, anchor: .center)
+                }
             }
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text(viewModel.title).font(.title)
+                }
+            }
+            
+            .navigationBarTitleDisplayMode(.inline)
+            
         }
+        
         .onAppear {
             viewModel.fetchTracks()
         }
+        
     }
 }
 

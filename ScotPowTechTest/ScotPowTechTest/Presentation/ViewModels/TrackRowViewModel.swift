@@ -24,20 +24,14 @@ class TrackRowViewModel: Identifiable {
     }
     
     var price: String {
-        getLocalisedPriceLabel()
+        PriceFormatter.getLocalisedPriceLabel(forCode: track.currency, price: track.trackPrice)
     }
     
     init(track: ItunesTrack) {
         self.track = track
     }
     
-    private func getLocalisedPriceLabel() -> String {
-        let currency = getCurrencySymbol(forCode: track.currency)
-        return "\(currency) \(track.trackPrice)"
-    }
-    
-    private func getCurrencySymbol(forCode currencyCode: String) -> String {
-        let locale = NSLocale(localeIdentifier: currencyCode)
-        return locale.displayName(forKey: NSLocale.Key.currencySymbol, value: currencyCode) ?? ""
+    func getDetailViewModel() -> TrackDetailViewModel {
+        return TrackDetailViewModel(track: track)
     }
 }

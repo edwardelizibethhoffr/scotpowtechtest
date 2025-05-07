@@ -28,7 +28,6 @@ public class NetworkService: NetworkServiceProtocol {
                 //catch any responses that are not 200
                 guard let httpResponse = output.response as? HTTPURLResponse,
                   httpResponse.statusCode == 200 else {
-                    print("Request failed. Response was not 200")
                     throw AppError.network(description: "Request failed. Response was not 200")
                   }
                 return output.data

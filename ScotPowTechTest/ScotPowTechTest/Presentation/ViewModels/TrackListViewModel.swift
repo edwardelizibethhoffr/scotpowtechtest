@@ -13,6 +13,12 @@ class TrackListViewModel: TrackListViewModelProtocol,  ObservableObject {
     
     @Published var tracks: [TrackRowViewModel] = []
     
+    @Published var isFetching = false
+    
+    var title: String {
+        "\(defaultTerm.capitalized) Tracks"
+    }
+    
     private let service: ItunesServiceProtocol
     private let defaultTerm = "rock"
     private var disposables = Set<AnyCancellable>()
@@ -22,13 +28,14 @@ class TrackListViewModel: TrackListViewModelProtocol,  ObservableObject {
     }
     
     func fetchTracks() {
+        isFetching = true
         service.fetchTracks(forTerm: defaultTerm)
             .print()
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: {
                 [weak self] value in
                 guard let self = self else {return}
-                
+                self.isFetching = false
                 switch value {
                 case .failure:
                     self.tracks = []

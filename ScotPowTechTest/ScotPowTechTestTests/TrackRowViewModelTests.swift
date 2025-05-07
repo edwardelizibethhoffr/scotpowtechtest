@@ -48,4 +48,9 @@ final class TrackRowViewModelTests: XCTestCase {
         XCTAssertEqual(expectedPrice, viewModel.price)
     }
 
+    func testGetDetailViewModelReturnsADetailViewModelWithExpectedTrackData() {
+        let detailViewModel = viewModel.getDetailViewModel()
+        
+        XCTAssertEqual(detailViewModel.artistName, viewModel.artistName)
+    }
 }

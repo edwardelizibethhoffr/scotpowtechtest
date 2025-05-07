@@ -11,6 +11,7 @@ struct TrackRowView: View {
     
     private let viewModel: TrackRowViewModel
     private let rowHeight: CGFloat = 100
+    private let imageWidth: CGFloat = 100
     
     init(viewModel: TrackRowViewModel) {
         self.viewModel = viewModel
@@ -19,6 +20,7 @@ struct TrackRowView: View {
     var body: some View {
         HStack {
             AsyncImage(url: viewModel.imageURL)
+                .frame(width: imageWidth)
             
             VStack(alignment: .leading) {
                 Text(viewModel.trackName)
