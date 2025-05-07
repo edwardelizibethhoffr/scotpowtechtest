@@ -29,6 +29,16 @@
 		65BC58412DCB5FD700A02F12 /* ScotPowTechTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScotPowTechTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		65BC589A2DCBABEF00A02F12 /* Exceptions for "ScotPowTechTestTests" folder in "ScotPowTechTest" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Mocks/TrackBuilder.swift,
+			);
+			target = 65BC58262DCB5FD600A02F12 /* ScotPowTechTest */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		65BC58292DCB5FD600A02F12 /* ScotPowTechTest */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -37,6 +47,9 @@
 		};
 		65BC583A2DCB5FD700A02F12 /* ScotPowTechTestTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				65BC589A2DCBABEF00A02F12 /* Exceptions for "ScotPowTechTestTests" folder in "ScotPowTechTest" target */,
+			);
 			path = ScotPowTechTestTests;
 			sourceTree = "<group>";
 		};

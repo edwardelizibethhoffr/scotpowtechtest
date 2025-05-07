@@ -7,7 +7,12 @@
 
 import Foundation
 
-public struct ItunesResponse: Decodable {
+struct ItunesResponse: Codable {
     let resultCount: Int
     let results: [ItunesTrack]
+    
+    enum CodingKeys: String, CodingKey {
+        case resultCount = "resultCount"
+        case results = "results"
+    }
 }

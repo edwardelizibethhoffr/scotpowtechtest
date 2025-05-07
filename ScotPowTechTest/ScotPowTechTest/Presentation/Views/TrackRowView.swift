@@ -8,11 +8,31 @@
 import SwiftUI
 
 struct TrackRowView: View {
+    
+    private let viewModel: TrackRowViewModel
+    private let rowHeight: CGFloat = 100
+    
+    init(viewModel: TrackRowViewModel) {
+        self.viewModel = viewModel
+    }
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            AsyncImage(url: viewModel.imageURL)
+            
+            VStack(alignment: .leading) {
+                Text(viewModel.trackName)
+                Text(viewModel.artistName)
+                Spacer()
+                Text(viewModel.price)
+            }.padding()
+            Spacer()
+        }
+        .frame(height: rowHeight)
+        .padding()
     }
 }
 
 #Preview {
-    TrackRowView()
+    TrackRowView(viewModel: TrackRowViewModel(track: TrackBuilder().build()))
 }

@@ -4,32 +4,48 @@
 //
 //  Created by Calum Maclellan on 07/05/2025.
 //
-
+@testable import ScotPowTechTest
 import XCTest
+
 
 final class TrackRowViewModelTests: XCTestCase {
 
+    var viewModel: TrackRowViewModel!
+    var track: ItunesTrack!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        track = TrackBuilder()
+            .withTrackId(123)
+            .withArtistName("Funkadelic")
+            .withTrackName("Super Stupid")
+            .withPrice(0.99)
+            .withCurrency("GBP")
+            .withArtworkURL100("https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/71/2d/61/712d617d-f4a4-5904-1b11-d4b4b45c47c5/828768588925.jpg/100x100bb.jpg")
+            .build()
+        
+        viewModel = TrackRowViewModel(track: track)
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func testViewModelReturnsImageUrl() {
+        let url = viewModel.imageURL
+        XCTAssertNotNil(url)
+        let expectedURL = URL(string: track.artworkUrl100)!
+        XCTAssertEqual(expectedURL, url)
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+  
+    func testViewModelReturnsExpectedArtistName() {
+        let expectedName = track.artistName
+        XCTAssertEqual(expectedName, viewModel.artistName)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testViewModelReturnsExpectedTrackName() {
+        let expectedName = track.trackName
+        XCTAssertEqual(expectedName, viewModel.trackName)
+    }
+    
+    func testViewModelReturnsExpectedFormattedPrice() {
+        let expectedPrice = "£ 0.99"
+        XCTAssertEqual(expectedPrice, viewModel.price)
     }
 
 }

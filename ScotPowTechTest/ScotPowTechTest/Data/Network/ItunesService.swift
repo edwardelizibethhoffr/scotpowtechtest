@@ -13,7 +13,7 @@ class ItunesService: ItunesServiceProtocol {
     private let scheme = "https"
     private let host = "itunes.apple.com"
     
-    init(networkService: NetworkServiceProtocol) {
+    init(networkService: NetworkServiceProtocol = NetworkService()) {
         self.networkService = networkService
     }
     
@@ -25,6 +25,7 @@ class ItunesService: ItunesServiceProtocol {
         
         return networkService.fetch(ItunesResponse.self, url: url)
             .map {(response: ItunesResponse) in
+                print("Have results \(response.resultCount)")
                 return response.results
             }
             .eraseToAnyPublisher()

@@ -16,23 +16,33 @@ public class NetworkService: NetworkServiceProtocol {
     }
     
     func fetch<T: Decodable>(_ t: T.Type, url: URL) -> AnyPublisher<T, Error> {
+        print(url.absoluteString)
         return session.dataTaskPublisher(for: URLRequest(url: url))
             .subscribe(on: DispatchQueue.global(qos: .default))
             .mapError {
                 error in
+                print("NetworkService \(error.localizedDescription)")
                 return AppError.network(description: error.localizedDescription)
             }
             .tryMap() { output -> Data in
                 //catch any responses that are not 200
                 guard let httpResponse = output.response as? HTTPURLResponse,
                   httpResponse.statusCode == 200 else {
+                    print("Request failed. Response was not 200")
                     throw AppError.network(description: "Request failed. Response was not 200")
                   }
                 return output.data
               }
             .decode(type: T.self, decoder: JSONDecoder())
+            .print()
+            .mapError {
+                error in
+                print(error.localizedDescription)
+                return AppError.parsing(description: "Error parsing JSON returned by request")
+            }
             .eraseToAnyPublisher()
     }
+ 
 }
 
 

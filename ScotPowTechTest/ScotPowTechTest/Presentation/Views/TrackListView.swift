@@ -8,11 +8,24 @@
 import SwiftUI
 
 struct TrackListView: View {
+    
+    @StateObject var viewModel = TrackListViewModel(service: ItunesService(networkService: NetworkService()))
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List($viewModel.tracks, id: \.id) {
+            $track in
+            NavigationLink(destination: TrackDetailView()) {
+                TrackRowView(viewModel: track)
+            }
+        }
+        .onAppear {
+            viewModel.fetchTracks()
+        }
     }
 }
 
 #Preview {
-    TrackListView()
+    var vm = TrackListViewModel()
+    vm.tracks = [TrackRowViewModel(track: TrackBuilder().build())]
+    return TrackListView(viewModel: vm)
 }
