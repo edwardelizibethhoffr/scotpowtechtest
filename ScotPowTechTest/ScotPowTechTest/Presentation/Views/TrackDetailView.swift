@@ -17,8 +17,6 @@ struct TrackDetailView: View {
     private let imageHeight: CGFloat = 100
     
     var body: some View {
-       
-        NavigationView {
             VStack {
                 HStack(alignment: .center){
                     AsyncImage(url: viewModel.imageURL)
@@ -58,7 +56,6 @@ struct TrackDetailView: View {
                 .frame(maxHeight: .infinity)
             }
             .frame(maxWidth: .infinity)
-        }
     }
     
     

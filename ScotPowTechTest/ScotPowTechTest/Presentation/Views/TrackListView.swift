@@ -14,17 +14,19 @@ struct TrackListView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                List($viewModel.tracks, id: \.id) {
-                    $track in
-                    NavigationLink(destination:
-                                   TrackDetailView(viewModel: track.getDetailViewModel() )) {
-                        TrackRowView(viewModel: track)
+                VStack {
+                    List($viewModel.tracks, id: \.id) {
+                        $track in
+                        NavigationLink(destination:
+                                       TrackDetailView(viewModel: track.getDetailViewModel() )) {
+                            TrackRowView(viewModel: track)
+                        }
                     }
+                    .refreshable {
+                        viewModel.fetchTracks()
+                    }
+                   
                 }
-                .refreshable {
-                    viewModel.fetchTracks()
-                }
-                
                 if (viewModel.isFetching)
                 {
                     ProgressView()

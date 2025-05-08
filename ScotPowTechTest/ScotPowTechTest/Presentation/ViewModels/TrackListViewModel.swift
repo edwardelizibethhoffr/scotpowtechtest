@@ -28,6 +28,7 @@ class TrackListViewModel: TrackListViewModelProtocol,  ObservableObject {
         self.service = service
     }
     
+    
     func fetchTracks() {
         isFetching = true
         errorFetching = false
