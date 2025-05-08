@@ -21,6 +21,9 @@ struct TrackListView: View {
                         TrackRowView(viewModel: track)
                     }
                 }
+                .refreshable {
+                    viewModel.fetchTracks()
+                }
                 
                 if (viewModel.isFetching)
                 {
@@ -34,11 +37,12 @@ struct TrackListView: View {
                     Text(viewModel.title).font(.title)
                 }
             }
-            
             .navigationBarTitleDisplayMode(.inline)
+            .alert("Error fetching tracks!", isPresented: $viewModel.errorFetching) {
+                Button("OK") {}
+            }
             
         }
-        
         .onAppear {
             viewModel.fetchTracks()
         }

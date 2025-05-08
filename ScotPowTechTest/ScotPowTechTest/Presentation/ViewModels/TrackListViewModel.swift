@@ -42,7 +42,6 @@ class TrackListViewModel: TrackListViewModelProtocol,  ObservableObject {
                 case .failure:
                     self.tracks = []
                     self.errorFetching = true
-                    //update the ui that there was an error
                     print("Failed")
                 case .finished:
                   break

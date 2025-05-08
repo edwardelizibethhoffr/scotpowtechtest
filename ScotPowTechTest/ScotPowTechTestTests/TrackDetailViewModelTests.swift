@@ -52,7 +52,7 @@ final class TrackDetailViewModelTests: XCTestCase {
     func testViewModelReturnsFormattedReleaseDate() {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-mm-dd'T'HH:mm:ssZ"
-        let expected = formatter.date(from: track.releaseDate)?.formatted(date: .numeric, time: .omitted) ?? "Failed"
+        let expected = formatter.date(from: track.releaseDate)?.formatted(date: .long, time: .omitted) ?? "Failed"
         XCTAssertEqual(expected, viewModel.releaseDate)
     }
     

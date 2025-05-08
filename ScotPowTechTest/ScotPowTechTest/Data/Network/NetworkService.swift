@@ -9,15 +9,19 @@ import Foundation
 import Combine
 
 public class NetworkService: NetworkServiceProtocol {
+    
     private let session: URLSession
+    private let TIMEOUT_TIME: Int = 5
     
     init(session: URLSession = .shared) {
-      self.session = session
+        let configuration = URLSessionConfiguration.ephemeral
+        self.session = URLSession(configuration: configuration)
     }
     
     func fetch<T: Decodable>(_ t: T.Type, url: URL) -> AnyPublisher<T, Error> {
         print(url.absoluteString)
-        return session.dataTaskPublisher(for: URLRequest(url: url))
+        return  session.dataTaskPublisher(for: URLRequest(url: url))
+            .timeout(.seconds(TIMEOUT_TIME), scheduler: DispatchQueue.main, options: nil, customError: { URLError(.timedOut)})
             .subscribe(on: DispatchQueue.global(qos: .default))
             .mapError {
                 error in
@@ -33,7 +37,6 @@ public class NetworkService: NetworkServiceProtocol {
                 return output.data
               }
             .decode(type: T.self, decoder: JSONDecoder())
-            .print()
             .mapError {
                 error in
                 print(error.localizedDescription)

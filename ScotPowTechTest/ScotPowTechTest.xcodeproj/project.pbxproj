@@ -53,11 +53,6 @@
 			path = ScotPowTechTestTests;
 			sourceTree = "<group>";
 		};
-		65BC58442DCB5FD700A02F12 /* ScotPowTechTestUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = ScotPowTechTestUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +85,6 @@
 			children = (
 				65BC58292DCB5FD600A02F12 /* ScotPowTechTest */,
 				65BC583A2DCB5FD700A02F12 /* ScotPowTechTestTests */,
-				65BC58442DCB5FD700A02F12 /* ScotPowTechTestUITests */,
 				65BC58282DCB5FD600A02F12 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -165,9 +159,6 @@
 			);
 			dependencies = (
 				65BC58432DCB5FD700A02F12 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				65BC58442DCB5FD700A02F12 /* ScotPowTechTestUITests */,
 			);
 			name = ScotPowTechTestUITests;
 			packageProductDependencies = (

@@ -13,6 +13,7 @@ final class TrackListViewModelTests: XCTestCase {
     
     var viewModel: TrackListViewModel!
     var mockService: MockItunesService!
+    var disposables = Set<AnyCancellable>()
     
     override func setUpWithError() throws {
        mockService = MockItunesService()
@@ -31,7 +32,6 @@ final class TrackListViewModelTests: XCTestCase {
     
     
     func testFetchTracksUpdatesIsFetchingOnSuccess() {
-        var cancellables: [AnyCancellable] = []
         let emptyArray: [ItunesTrack] = []
         mockService.testOutcome = .success(data: emptyArray)
         
@@ -45,7 +45,7 @@ final class TrackListViewModelTests: XCTestCase {
             if (recievedValues.count > 2) {
                 exp.fulfill()
             }
-        }).store(in: &cancellables)
+        }).store(in: &disposables)
         
         viewModel.fetchTracks()
         
@@ -60,7 +60,6 @@ final class TrackListViewModelTests: XCTestCase {
     }
     
     func testFetchTracksUpdatesIsFetchingOnFailure() {
-        var cancellables: [AnyCancellable] = []
         mockService.testOutcome = .failure(error: AppError.test(description: "Expected test failure"))
         
         var recievedValues: [Bool] = []
@@ -73,7 +72,7 @@ final class TrackListViewModelTests: XCTestCase {
             if (recievedValues.count > 2) {
                 isFetchingExpectation.fulfill()
             }
-        }).store(in: &cancellables)
+        }).store(in: &disposables)
         
         viewModel.fetchTracks()
         
@@ -90,7 +89,7 @@ final class TrackListViewModelTests: XCTestCase {
     func testFetchTracksUpdatesTracksOnSuccess() {
         let tracks = TrackBuilder().build(thisMany: 5)
         
-        var cancellables: [AnyCancellable] = []
+        
         mockService.testOutcome = .success(data: tracks)
         
         let tracksUpdatedExpectation = expectation(description: "tracks updated with expected size")
@@ -102,7 +101,7 @@ final class TrackListViewModelTests: XCTestCase {
             if (tracks.count == 5) {
                 tracksUpdatedExpectation.fulfill()
             }
-        }).store(in: &cancellables)
+        }).store(in: &disposables)
         
         viewModel.fetchTracks()
         
@@ -114,7 +113,6 @@ final class TrackListViewModelTests: XCTestCase {
     }
     
     func testFetchTracksUpdatesTracksToEmptyArrayOnFailure() {
-        var cancellables: [AnyCancellable] = []
         mockService.testOutcome = .failure(error: AppError.test(description: "Expected test failure"))
         
         let tracksUpdatedExpectation = expectation(description: "tracks updated to empty array")
@@ -128,7 +126,7 @@ final class TrackListViewModelTests: XCTestCase {
             if (tracks.count == 0) {
                 tracksUpdatedExpectation.fulfill()
             }
-        }).store(in: &cancellables)
+        }).store(in: &disposables)
         
         viewModel.fetchTracks()
         
@@ -157,7 +155,6 @@ final class TrackListViewModelTests: XCTestCase {
             expectedNamesOrder.insert(tracks[i].trackName, at: 0)
         }
         
-        var cancellables: [AnyCancellable] = []
         mockService.testOutcome = .success(data: tracks)
         
         let tracksUpdatedExpectation = expectation(description: "tracks updated with expected size")
@@ -169,7 +166,7 @@ final class TrackListViewModelTests: XCTestCase {
             if (tracks.count == 5) {
                 tracksUpdatedExpectation.fulfill()
             }
-        }).store(in: &cancellables)
+        }).store(in: &disposables)
         
         viewModel.fetchTracks()
         
