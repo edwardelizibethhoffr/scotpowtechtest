@@ -14,6 +14,7 @@ class TrackListViewModel: TrackListViewModelProtocol,  ObservableObject {
     @Published var tracks: [TrackRowViewModel] = []
     
     @Published var isFetching = false
+    @Published var errorFetching = false
     
     var title: String {
         "\(defaultTerm.capitalized) Tracks"
@@ -29,8 +30,9 @@ class TrackListViewModel: TrackListViewModelProtocol,  ObservableObject {
     
     func fetchTracks() {
         isFetching = true
+        errorFetching = false
+        
         service.fetchTracks(forTerm: defaultTerm)
-            .print()
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: {
                 [weak self] value in
@@ -39,6 +41,7 @@ class TrackListViewModel: TrackListViewModelProtocol,  ObservableObject {
                 switch value {
                 case .failure:
                     self.tracks = []
+                    self.errorFetching = true
                     //update the ui that there was an error
                     print("Failed")
                 case .finished:
@@ -49,7 +52,7 @@ class TrackListViewModel: TrackListViewModelProtocol,  ObservableObject {
                 [weak self] trackResult in
                 guard let self = self else {return}
                 
-                self.tracks = trackResult.map {TrackRowViewModel(track: $0)}
+                self.tracks = trackResult.map {TrackRowViewModel(track: $0)}.sorted(by: {$0.releaseDate  > $1.releaseDate})
             })
             .store(in: &disposables)
     }

@@ -53,4 +53,22 @@ final class TrackRowViewModelTests: XCTestCase {
         
         XCTAssertEqual(detailViewModel.artistName, viewModel.artistName)
     }
+    
+    func testViewModelReturnsExpectedDateWhenStringIsCorrectFormat() {
+        let dateString = "1981-06-03T07:00:00Z"
+        let track = TrackBuilder().withReleaseDate(dateString).build()
+        let vm = TrackRowViewModel(track: track)
+        let expected = DateFormatter().dateFromItunesAPIString(dateString)
+        
+        XCTAssertEqual(expected, vm.releaseDate)
+    }
+    
+    func testViewModelReturnsDistantPastWhenTrackDateIsWrongFormat() {
+        let invalidDateString = "198X-06-03T07:00:00Z"
+        let track = TrackBuilder().withReleaseDate(invalidDateString).build()
+        let vm = TrackRowViewModel(track: track)
+        let expected = Date.distantPast
+        
+        XCTAssertEqual(expected, vm.releaseDate)
+    }
 }

@@ -27,6 +27,11 @@ class TrackRowViewModel: Identifiable {
         PriceFormatter.getLocalisedPriceLabel(forCode: track.currency, price: track.trackPrice)
     }
     
+    var releaseDate: Date {
+        //this date is only used for sorting - if parsing fails return distant past
+        DateFormatter().dateFromItunesAPIString(track.releaseDate) ?? Date.distantPast
+    }
+    
     init(track: ItunesTrack) {
         self.track = track
     }

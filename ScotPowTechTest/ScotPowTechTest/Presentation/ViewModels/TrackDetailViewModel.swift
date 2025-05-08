@@ -38,7 +38,7 @@ class TrackDetailViewModel {
     }
     
     var releaseDate: String {
-        return DateFormatter().itunesDateString(track.releaseDate) ?? ""
+        return DateFormatter().itunesDateForDisplayString(track.releaseDate) ?? ""
     }
     
     var trackViewURL: URL? {

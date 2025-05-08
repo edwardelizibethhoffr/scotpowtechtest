@@ -18,16 +18,13 @@ struct TrackDetailView: View {
     var body: some View {
         VStack {
             HStack(alignment: .center){
-                
                 AsyncImage(url: viewModel.imageURL)
                     .frame(width: imageWidth, height: imageHeight)
-                
             }
             .frame(maxHeight: .infinity)
             
             HStack(alignment: .center) {
-                if (horizontalSizeClass != .compact)
-                {
+                if (horizontalSizeClass != .compact){
                     Spacer()
                 }
                 VStack(alignment: .leading) {
@@ -49,12 +46,16 @@ struct TrackDetailView: View {
                 label: {
                     Text("More Details")
                 }
+                .buttonStyle(.borderedProminent)
                 Spacer()
             }
             .frame(maxHeight: .infinity)
         }
         .frame(maxWidth: .infinity)
     }
+    
+    
+    
 }
 
 #Preview {

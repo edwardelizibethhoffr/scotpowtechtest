@@ -8,7 +8,7 @@
 @testable import ScotPowTechTest
 import Foundation
 
-//was created to easily build multiple tracks for testing but is also useful for Previews
+//was created to easily build tracks for testing but is also useful for Previews
 
 class TrackBuilder {
     
@@ -70,6 +70,16 @@ class TrackBuilder {
     
     func build() -> ItunesTrack {
         return track
+    }
+    
+    func build(thisMany number: Int) -> [ItunesTrack]{
+        var array: [ItunesTrack] = []
+        guard number < 1000 && number > 0 else {return array}
+        
+        for i in 1...number {
+            array.append(withTrackId(i).build())
+        }
+        return array
     }
     
 }
