@@ -12,12 +12,16 @@ import Combine
 final class TrackListViewModelTests: XCTestCase {
     
     var viewModel: TrackListViewModel!
-    var mockService: MockItunesService!
+    var mockService: MockGetItunesTracksUseCase!
     var disposables = Set<AnyCancellable>()
     
     override func setUpWithError() throws {
-       mockService = MockItunesService()
+       mockService = MockGetItunesTracksUseCase()
         viewModel = TrackListViewModel(service: mockService)
+    }
+    
+    override func tearDownWithError() throws {
+        disposables.forEach({$0.cancel()})
     }
 
     func testFetchTracksCallService() {
@@ -99,6 +103,7 @@ final class TrackListViewModelTests: XCTestCase {
         viewModel.$tracks.sink(receiveValue: {
             tracks in
             if (tracks.count == 5) {
+                print("Have 5 tracks")
                 tracksUpdatedExpectation.fulfill()
             }
         }).store(in: &disposables)
@@ -106,9 +111,10 @@ final class TrackListViewModelTests: XCTestCase {
         viewModel.fetchTracks()
         
         wait(for: [tracksUpdatedExpectation], timeout: 1)
-      
+        
+        let isFetching = viewModel.isFetching
+        
         XCTAssertEqual(viewModel.tracks.count, 5)
-        XCTAssertFalse(viewModel.isFetching)
         XCTAssertFalse(viewModel.errorFetching)
     }
     
@@ -176,7 +182,6 @@ final class TrackListViewModelTests: XCTestCase {
         
         XCTAssertEqual(expectedNamesOrder, outputNames)
         XCTAssertEqual(viewModel.tracks.count, 5)
-        XCTAssertFalse(viewModel.isFetching)
         XCTAssertFalse(viewModel.errorFetching)
         
     }

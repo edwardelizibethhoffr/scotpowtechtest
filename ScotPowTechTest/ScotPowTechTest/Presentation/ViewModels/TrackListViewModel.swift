@@ -43,6 +43,7 @@ class TrackListViewModel: TrackListViewModelProtocol,  ObservableObject {
             .sink(receiveCompletion: {
                 [weak self] value in
                 guard let self = self else {return}
+                print("Setting isFetching false")
                 self.isFetching = false
                 switch value {
                 case .failure:
@@ -56,7 +57,7 @@ class TrackListViewModel: TrackListViewModelProtocol,  ObservableObject {
             }, receiveValue: {
                 [weak self] trackResult in
                 guard let self = self else {return}
-                
+                print("Setting trackResult")
                 self.tracks = trackResult
             })
             .store(in: &disposables)
