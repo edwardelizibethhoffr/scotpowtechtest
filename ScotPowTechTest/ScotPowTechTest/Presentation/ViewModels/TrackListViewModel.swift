@@ -20,11 +20,11 @@ class TrackListViewModel: TrackListViewModelProtocol,  ObservableObject {
         "\(defaultTerm.capitalized) Tracks"
     }
     
-    private let service: ItunesServiceProtocol
+    private let service: GetItunesTracksUseCaseProtocol
     private let defaultTerm = "rock"
     private var disposables = Set<AnyCancellable>()
     
-    init(service: ItunesServiceProtocol = ItunesService()) {
+    init(service: GetItunesTracksUseCaseProtocol = ItunesService()) {
         self.service = service
     }
     

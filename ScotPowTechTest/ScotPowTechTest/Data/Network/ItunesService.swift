@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-class ItunesService: ItunesServiceProtocol {
+class ItunesService: GetItunesTracksUseCaseProtocol {
     private let networkService: NetworkServiceProtocol
     private let scheme = "https"
     private let host = "itunes.apple.com"
@@ -39,8 +39,4 @@ class ItunesService: ItunesServiceProtocol {
         components.queryItems = queryItems
         return components.url
     }
-}
-
-protocol ItunesServiceProtocol {
-    func fetchTracks(forTerm term: String) -> AnyPublisher<[ItunesTrack], Error>
 }

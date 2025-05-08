@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 
-class MockItunesService: ItunesServiceProtocol {
+class MockGetItunesTracksUseCase: GetItunesTracksUseCaseProtocol {
     
     var testOutcome: TestOutcome
     var fetchTracksCallCounter = 0
