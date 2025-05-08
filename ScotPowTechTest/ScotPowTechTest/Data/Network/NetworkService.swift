@@ -23,6 +23,7 @@ public class NetworkService: NetworkServiceProtocol {
         return  session.dataTaskPublisher(for: URLRequest(url: url))
             .timeout(.seconds(TIMEOUT_TIME), scheduler: DispatchQueue.main, options: nil, customError: { URLError(.timedOut)})
             .subscribe(on: DispatchQueue.global(qos: .default))
+            .receive(on: DispatchQueue.global(qos: .default))
             .mapError {
                 error in
                 print("NetworkService \(error.localizedDescription)")

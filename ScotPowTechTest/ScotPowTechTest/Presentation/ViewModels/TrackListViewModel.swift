@@ -33,6 +33,12 @@ class TrackListViewModel: TrackListViewModelProtocol,  ObservableObject {
         errorFetching = false
         
         service.fetchTracks(forTerm: defaultTerm)
+            .subscribe(on: DispatchQueue.global(qos: .default))
+            .receive(on: DispatchQueue.global(qos: .default))
+            .map {
+                tracks in
+                return tracks.map {TrackRowViewModel(track: $0)}.sorted(by: {$0.releaseDate  > $1.releaseDate})
+            }
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: {
                 [weak self] value in
@@ -51,7 +57,7 @@ class TrackListViewModel: TrackListViewModelProtocol,  ObservableObject {
                 [weak self] trackResult in
                 guard let self = self else {return}
                 
-                self.tracks = trackResult.map {TrackRowViewModel(track: $0)}.sorted(by: {$0.releaseDate  > $1.releaseDate})
+                self.tracks = trackResult
             })
             .store(in: &disposables)
     }

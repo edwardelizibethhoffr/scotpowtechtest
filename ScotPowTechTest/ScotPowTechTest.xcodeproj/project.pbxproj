@@ -14,19 +14,11 @@
 			remoteGlobalIDString = 65BC58262DCB5FD600A02F12;
 			remoteInfo = ScotPowTechTest;
 		};
-		65BC58422DCB5FD700A02F12 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 65BC581F2DCB5FD600A02F12 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 65BC58262DCB5FD600A02F12;
-			remoteInfo = ScotPowTechTest;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		65BC58272DCB5FD600A02F12 /* ScotPowTechTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScotPowTechTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65BC58372DCB5FD700A02F12 /* ScotPowTechTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScotPowTechTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		65BC58412DCB5FD700A02F12 /* ScotPowTechTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScotPowTechTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -70,13 +62,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		65BC583E2DCB5FD700A02F12 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -94,7 +79,6 @@
 			children = (
 				65BC58272DCB5FD600A02F12 /* ScotPowTechTest.app */,
 				65BC58372DCB5FD700A02F12 /* ScotPowTechTestTests.xctest */,
-				65BC58412DCB5FD700A02F12 /* ScotPowTechTestUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -147,26 +131,6 @@
 			productReference = 65BC58372DCB5FD700A02F12 /* ScotPowTechTestTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		65BC58402DCB5FD700A02F12 /* ScotPowTechTestUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 65BC58512DCB5FD700A02F12 /* Build configuration list for PBXNativeTarget "ScotPowTechTestUITests" */;
-			buildPhases = (
-				65BC583D2DCB5FD700A02F12 /* Sources */,
-				65BC583E2DCB5FD700A02F12 /* Frameworks */,
-				65BC583F2DCB5FD700A02F12 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				65BC58432DCB5FD700A02F12 /* PBXTargetDependency */,
-			);
-			name = ScotPowTechTestUITests;
-			packageProductDependencies = (
-			);
-			productName = ScotPowTechTestUITests;
-			productReference = 65BC58412DCB5FD700A02F12 /* ScotPowTechTestUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -181,10 +145,6 @@
 						CreatedOnToolsVersion = 16.2;
 					};
 					65BC58362DCB5FD700A02F12 = {
-						CreatedOnToolsVersion = 16.2;
-						TestTargetID = 65BC58262DCB5FD600A02F12;
-					};
-					65BC58402DCB5FD700A02F12 = {
 						CreatedOnToolsVersion = 16.2;
 						TestTargetID = 65BC58262DCB5FD600A02F12;
 					};
@@ -206,7 +166,6 @@
 			targets = (
 				65BC58262DCB5FD600A02F12 /* ScotPowTechTest */,
 				65BC58362DCB5FD700A02F12 /* ScotPowTechTestTests */,
-				65BC58402DCB5FD700A02F12 /* ScotPowTechTestUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -220,13 +179,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		65BC58352DCB5FD700A02F12 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		65BC583F2DCB5FD700A02F12 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -250,13 +202,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		65BC583D2DCB5FD700A02F12 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -264,11 +209,6 @@
 			isa = PBXTargetDependency;
 			target = 65BC58262DCB5FD600A02F12 /* ScotPowTechTest */;
 			targetProxy = 65BC58382DCB5FD700A02F12 /* PBXContainerItemProxy */;
-		};
-		65BC58432DCB5FD700A02F12 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 65BC58262DCB5FD600A02F12 /* ScotPowTechTest */;
-			targetProxy = 65BC58422DCB5FD700A02F12 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -490,40 +430,6 @@
 			};
 			name = Release;
 		};
-		65BC58522DCB5FD700A02F12 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7L847DX3TS;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.calum.ScottishPowerTest.ScotPowTechTestUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ScotPowTechTest;
-			};
-			name = Debug;
-		};
-		65BC58532DCB5FD700A02F12 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7L847DX3TS;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.calum.ScottishPowerTest.ScotPowTechTestUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ScotPowTechTest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -550,15 +456,6 @@
 			buildConfigurations = (
 				65BC584F2DCB5FD700A02F12 /* Debug */,
 				65BC58502DCB5FD700A02F12 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		65BC58512DCB5FD700A02F12 /* Build configuration list for PBXNativeTarget "ScotPowTechTestUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				65BC58522DCB5FD700A02F12 /* Debug */,
-				65BC58532DCB5FD700A02F12 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -17,7 +17,7 @@ struct TrackListView: View {
                 List($viewModel.tracks, id: \.id) {
                     $track in
                     NavigationLink(destination:
-                                    TrackDetailView(viewModel: track.getDetailViewModel() )) {
+                                   TrackDetailView(viewModel: track.getDetailViewModel() )) {
                         TrackRowView(viewModel: track)
                     }
                 }

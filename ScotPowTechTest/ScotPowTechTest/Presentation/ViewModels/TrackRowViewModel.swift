@@ -35,8 +35,10 @@ class TrackRowViewModel: Identifiable {
     init(track: ItunesTrack) {
         self.track = track
     }
+
     
     func getDetailViewModel() -> TrackDetailViewModel {
         return TrackDetailViewModel(track: track)
     }
+    
 }
