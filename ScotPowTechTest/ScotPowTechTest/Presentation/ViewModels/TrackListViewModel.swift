@@ -11,10 +11,19 @@ import Combine
 
 class TrackListViewModel: TrackListViewModelProtocol,  ObservableObject {
     
-    @Published var tracks: [TrackRowViewModel] = []
+    @Published var tracks: [TrackRowViewModel] = [] {
+        didSet {
+            if !tracks.isEmpty {
+                defaultTrackDetailViewModel = tracks.first!.getDetailViewModel()
+            }
+        }
+    }
     
     @Published var isFetching = false
     @Published var errorFetching = false
+    
+    @Published var defaultTrackDetailViewModel: TrackDetailViewModel
+    
     
     var title: String {
         "\(defaultTerm.capitalized) Tracks"
@@ -26,6 +35,8 @@ class TrackListViewModel: TrackListViewModelProtocol,  ObservableObject {
     
     init(service: GetItunesTracksUseCaseProtocol = ItunesService()) {
         self.service = service
+        
+        defaultTrackDetailViewModel =  TrackDetailViewModel()
     }
     
     

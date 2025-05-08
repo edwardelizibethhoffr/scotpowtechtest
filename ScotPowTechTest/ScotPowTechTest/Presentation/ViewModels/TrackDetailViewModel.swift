@@ -45,6 +45,11 @@ class TrackDetailViewModel {
         return URL(string: track.trackViewURL)
     }
     
+    init() {
+        //initialise with empty track as placeholder - for use in defaultTrackDetailView before the first results are fetched
+        self.track = ItunesTrack(trackID: 0, artistName: "", trackName: "", trackPrice: 0.0, currency: "", artworkUrl100: "", trackTimeMillis: 0, releaseDate: "", trackViewURL: "")
+    }
+    
     init(track: ItunesTrack) {
         self.track = track
     }

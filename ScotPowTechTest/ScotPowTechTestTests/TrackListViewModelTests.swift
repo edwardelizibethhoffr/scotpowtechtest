@@ -112,8 +112,6 @@ final class TrackListViewModelTests: XCTestCase {
         
         wait(for: [tracksUpdatedExpectation], timeout: 1)
         
-        let isFetching = viewModel.isFetching
-        
         XCTAssertEqual(viewModel.tracks.count, 5)
         XCTAssertFalse(viewModel.errorFetching)
     }
@@ -186,4 +184,50 @@ final class TrackListViewModelTests: XCTestCase {
         
     }
 
+    func testViewModelReturnsDefaultTrackDetailViewModelBeforeTracksAreFetched() {
+        var detailVm: TrackDetailViewModel?
+        
+        let exp = expectation(description: "detail viewModel was set")
+        
+        let disposalble = viewModel.$defaultTrackDetailViewModel.sink(receiveValue: {
+            vm in
+            detailVm = vm
+            exp.fulfill()
+        })
+        
+        wait(for: [exp], timeout: 1)
+        
+        XCTAssertNotNil(detailVm)
+        XCTAssertEqual(detailVm?.trackName, "")
+        
+        disposalble.cancel()
+    }
+    
+    func testDefaultDetailViewModelIsUpdatedWithFirstTrack() {
+        let tracks = [TrackBuilder().withArtistName("Test One").build(), TrackBuilder().withArtistName("Test Two").build()]
+        
+        let expectedArtistName = tracks[0].artistName
+        
+        mockService.testOutcome = .success(data: tracks)
+        
+        let tracksUpdatedExpectation = expectation(description: "tracks updated with expected size")
+    
+        viewModel.tracks = []
+        
+        viewModel.$tracks.sink(receiveValue: {
+            tracks in
+            if (tracks.count == 2) {
+                print("Have 2 tracks")
+                tracksUpdatedExpectation.fulfill()
+            }
+        }).store(in: &disposables)
+        
+        viewModel.fetchTracks()
+        
+        wait(for: [tracksUpdatedExpectation], timeout: 1)
+        
+        XCTAssertEqual(viewModel.defaultTrackDetailViewModel.artistName, expectedArtistName)
+    }
+    
+    
 }
